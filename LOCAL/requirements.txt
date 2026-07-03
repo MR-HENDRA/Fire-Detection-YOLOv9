@@ -1,0 +1,7 @@
+ultralytics
+torch
+torchvision
+fastapi
+uvicorn
+python-multipart
+jinja2

@@ -1,0 +1,171 @@
+# =============================================
+# Fire Detection YOLOv9 - GitHub .gitignore
+# =============================================
+
+# =============================================
+# PYTHON
+# =============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# =============================================
+# VIRTUAL ENVIRONMENT
+# =============================================
+venv/
+ENV/
+env/
+.venv
+env.bak/
+venv.bak/
+
+# =============================================
+# IDE CONFIGURATIONS
+# =============================================
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# =============================================
+# MODEL FILES (Large binary files)
+# =============================================
+# YOLOv9 model files
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+*.h5
+*.pb
+*.meta
+*.ckpt
+
+# =============================================
+# DATASET (Very large - 13,000+ images)
+# =============================================
+LOCAL/DATASET/
+GOOGLE_COLAB/DATASET/
+**/DATASET/
+**/train/
+**/valid/
+**/test/
+**/images/
+**/labels/
+*.jpg
+*.jpeg
+*.png
+
+# =============================================
+# TRAINING OUTPUT
+# =============================================
+runs/
+wandb/
+*.log
+results.txt
+results*.txt
+
+# =============================================
+# TEMPORARY & CACHE FILES
+# =============================================
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+.cache/
+.tmp/
+
+# =============================================
+# UPLOAD & TEMP FOLDERS
+# =============================================
+uploads/
+temp/
+static/uploads/
+*.upload
+
+# =============================================
+# PYTHON CACHE & LOGS
+# =============================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# =============================================
+# ENVIRONMENT VARIABLES (Sensitive!)
+# =============================================
+.env
+.env.local
+.env.*
+!.env.example
+
+# =============================================
+# OS SPECIFIC FILES
+# =============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =============================================
+# BUILD & DISTRIBUTION
+# =============================================
+*.exe
+*.dll
+*.dylib
+*.so
+*.a
+*.lib
+*.o
+*.obj
+*.pyd
+*.pyo
+
+# =============================================
+# DOCUMENTATION BUILD
+# =============================================
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# =============================================
+# TEST COVERAGE
+# =============================================
+.coverage
+.coverage.*
+cover/

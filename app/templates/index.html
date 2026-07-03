@@ -1,293 +1,297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aplikasi deteksi kebakaran real-time menggunakan kecerdasan buatan YOLOv9. Upload gambar dan deteksi api secara instan.">
-    <title>🔥 Fire Detection — YOLOv9 AI</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-
-    <!-- Background Glow Effects -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-glow bg-glow-3"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aplikasi deteksi kebakaran real-time menggunakan kecerdasan buatan YOLOv9. Upload gambar dan deteksi api secara instan." />
+    <meta name="theme-color" content="#08080c" />
+    <title>Fire Detection — YOLOv9 AI | A3-HXCODE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
+  </head>
+  <body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+      <div class="bg-glow bg-glow-1"></div>
+      <div class="bg-glow bg-glow-2"></div>
+      <div class="bg-glow bg-glow-3"></div>
+      <div class="bg-grid"></div>
+    </div>
 
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <span class="logo-icon">🔥</span>
-                <div class="logo-text">
-                    <h1>Fire Detection</h1>
-                    <span class="logo-subtitle">Powered by YOLOv9 AI</span>
-                </div>
-            </div>
-            <nav class="nav-tabs">
-                <button class="nav-tab active" data-tab="detect" id="tab-detect">
-                    <span class="tab-icon">🎯</span> Deteksi
-                </button>
-                <button class="nav-tab" data-tab="stats" id="tab-stats">
-                    <span class="tab-icon">📊</span> Dataset
-                </button>
-                <button class="nav-tab" data-tab="about" id="tab-about">
-                    <span class="tab-icon">ℹ️</span> Tentang
-                </button>
-            </nav>
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">🔥</span>
+          <div class="logo-text">
+            <h1>Fire Detection</h1>
+            <span class="logo-subtitle">Powered by YOLOv9 AI</span>
+          </div>
         </div>
+        <nav class="nav-tabs">
+          <button class="nav-tab active" data-tab="detect" id="tab-detect"><span class="tab-icon">🎯</span> Deteksi</button>
+          <button class="nav-tab" data-tab="stats" id="tab-stats"><span class="tab-icon">📊</span> Dataset</button>
+          <button class="nav-tab" data-tab="about" id="tab-about"><span class="tab-icon">ℹ️</span> Tentang</button>
+        </nav>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-
-        <!-- Tab: Deteksi -->
-        <section class="tab-panel active" id="panel-detect">
-            <div class="detect-grid">
-
-                <!-- Upload Area -->
-                <div class="card upload-card">
-                    <div class="card-header">
-                        <h2>📤 Upload Gambar</h2>
-                        <p class="card-desc">Seret & lepas gambar, atau klik area di bawah</p>
-                    </div>
-
-                    <div class="dropzone" id="dropzone">
-                        <div class="dropzone-content" id="dropzone-content">
-                            <div class="dropzone-icon">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                    <polyline points="17 8 12 3 7 8"/>
-                                    <line x1="12" y1="3" x2="12" y2="15"/>
-                                </svg>
-                            </div>
-                            <p class="dropzone-text">Klik atau seret gambar ke sini</p>
-                            <p class="dropzone-hint">Format: JPG, PNG, WEBP (Maks. 10MB)</p>
-                        </div>
-                        <img class="preview-image hidden" id="preview-image" alt="Preview gambar yang diunggah">
-                        <input type="file" id="file-input" accept="image/*" hidden>
-                    </div>
-
-                    <!-- Confidence Slider -->
-                    <div class="slider-group">
-                        <label class="slider-label">
-                            <span>Ambang Kepercayaan</span>
-                            <span class="slider-value" id="confidence-value">25%</span>
-                        </label>
-                        <input type="range" class="slider" id="confidence-slider" min="5" max="95" value="25" step="5">
-                        <div class="slider-hints">
-                            <span>Lebih Sensitif</span>
-                            <span>Lebih Akurat</span>
-                        </div>
-                    </div>
-
-                    <!-- Detect Button -->
-                    <button class="btn-detect" id="btn-detect" disabled>
-                        <span class="btn-icon">🔍</span>
-                        <span class="btn-text">Mulai Deteksi</span>
-                        <div class="btn-loader hidden" id="btn-loader">
-                            <div class="spinner"></div>
-                        </div>
-                    </button>
-                </div>
-
-                <!-- Result Area -->
-                <div class="card result-card">
-                    <div class="card-header">
-                        <h2>📋 Hasil Deteksi</h2>
-                        <p class="card-desc" id="result-status">Menunggu gambar untuk diproses...</p>
-                    </div>
-
-                    <!-- Placeholder saat belum ada hasil -->
-                    <div class="result-placeholder" id="result-placeholder">
-                        <div class="placeholder-icon">🖼️</div>
-                        <p>Hasil deteksi akan muncul di sini</p>
-                    </div>
-
-                    <!-- Container gambar hasil -->
-                    <div class="result-image-container hidden" id="result-image-container">
-                        <img class="result-image" id="result-image" alt="Hasil deteksi api">
-                    </div>
-
-                    <!-- Statistik Deteksi -->
-                    <div class="detection-stats hidden" id="detection-stats">
-                        <div class="stat-card stat-fire">
-                            <div class="stat-number" id="stat-count">0</div>
-                            <div class="stat-label">Api Terdeteksi</div>
-                        </div>
-                        <div class="stat-card stat-conf">
-                            <div class="stat-number" id="stat-avg-conf">0%</div>
-                            <div class="stat-label">Rata-rata Akurasi</div>
-                        </div>
-                    </div>
-
-                    <!-- Tabel Detail -->
-                    <div class="detection-table-wrapper hidden" id="detection-table-wrapper">
-                        <h3>Detail Deteksi</h3>
-                        <table class="detection-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Label</th>
-                                    <th>Akurasi</th>
-                                    <th>Posisi (x1, y1, x2, y2)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="detection-table-body">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+      <!-- Tab: Deteksi -->
+      <section class="tab-panel active" id="panel-detect">
+        <div class="detect-grid">
+          <!-- Upload Area -->
+          <div class="card upload-card">
+            <div class="card-header">
+              <h2>📤 Upload Gambar</h2>
+              <p class="card-desc">Seret & lepas gambar, atau klik area di bawah untuk memilih file</p>
             </div>
-        </section>
 
-        <!-- Tab: Dataset Stats -->
-        <section class="tab-panel" id="panel-stats">
-            <div class="stats-container">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>📊 Statistik Dataset</h2>
-                        <p class="card-desc">Ringkasan jumlah data yang digunakan untuk melatih model AI</p>
-                    </div>
-                    <div class="dataset-stats-grid" id="dataset-stats-grid">
-                        <div class="ds-card ds-train">
-                            <div class="ds-icon">🏋️</div>
-                            <h3>Training</h3>
-                            <p class="ds-desc">Data untuk melatih AI</p>
-                            <div class="ds-numbers">
-                                <div class="ds-num"><span id="ds-train-img">—</span> Gambar</div>
-                                <div class="ds-num"><span id="ds-train-lbl">—</span> Label</div>
-                            </div>
-                        </div>
-                        <div class="ds-card ds-valid">
-                            <div class="ds-icon">✅</div>
-                            <h3>Validasi</h3>
-                            <p class="ds-desc">Data untuk menguji saat latihan</p>
-                            <div class="ds-numbers">
-                                <div class="ds-num"><span id="ds-valid-img">—</span> Gambar</div>
-                                <div class="ds-num"><span id="ds-valid-lbl">—</span> Label</div>
-                            </div>
-                        </div>
-                        <div class="ds-card ds-test">
-                            <div class="ds-icon">🧪</div>
-                            <h3>Testing</h3>
-                            <p class="ds-desc">Data untuk ujian akhir AI</p>
-                            <div class="ds-numbers">
-                                <div class="ds-num"><span id="ds-test-img">—</span> Gambar</div>
-                                <div class="ds-num"><span id="ds-test-lbl">—</span> Label</div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="dropzone" id="dropzone">
+              <div class="dropzone-content" id="dropzone-content">
+                <div class="dropzone-icon">
+                  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h2>ℹ️ Informasi Dataset</h2>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Sumber</span>
-                            <span class="info-value">Roboflow Universe</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Jumlah Kelas</span>
-                            <span class="info-value">1 (Fire / Api)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Resolusi Gambar</span>
-                            <span class="info-value">640 × 640 px</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Lisensi</span>
-                            <span class="info-value">CC BY 4.0</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Augmentasi</span>
-                            <span class="info-value">Flip, Rotasi, Crop Acak</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Total Gambar</span>
-                            <span class="info-value">± 5710 gambar</span>
-                        </div>
-                    </div>
-                </div>
+                <p class="dropzone-text">Klik atau seret gambar ke sini</p>
+                <p class="dropzone-hint">Format: JPG, PNG, WEBP | Maks. 10MB</p>
+              </div>
+              <img class="preview-image hidden" id="preview-image" alt="Preview gambar yang diunggah" />
+              <input type="file" id="file-input" accept="image/*" hidden />
             </div>
-        </section>
 
-        <!-- Tab: About -->
-        <section class="tab-panel" id="panel-about">
-            <div class="card about-card">
-                <div class="card-header">
-                    <h2>🔥 Tentang Aplikasi Ini</h2>
-                </div>
-                <div class="about-content">
-                    <p>
-                        Aplikasi <strong>Fire Detection</strong> ini menggunakan model kecerdasan buatan
-                        <strong>YOLOv9</strong> (You Only Look Once v9) untuk mendeteksi keberadaan api
-                        dalam gambar secara real-time.
-                    </p>
-
-                    <div class="about-flow">
-                        <h3>🔄 Alur Kerja Aplikasi</h3>
-                        <div class="flow-steps">
-                            <div class="flow-step">
-                                <div class="flow-number">1</div>
-                                <div class="flow-info">
-                                    <h4>Upload Gambar</h4>
-                                    <p>Pengguna mengunggah gambar melalui antarmuka web</p>
-                                </div>
-                            </div>
-                            <div class="flow-connector">→</div>
-                            <div class="flow-step">
-                                <div class="flow-number">2</div>
-                                <div class="flow-info">
-                                    <h4>Proses AI</h4>
-                                    <p>Model YOLOv9 menganalisis gambar untuk mencari api</p>
-                                </div>
-                            </div>
-                            <div class="flow-connector">→</div>
-                            <div class="flow-step">
-                                <div class="flow-number">3</div>
-                                <div class="flow-info">
-                                    <h4>Hasil Deteksi</h4>
-                                    <p>Kotak penanda ditampilkan di sekitar area api yang ditemukan</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tech-stack">
-                        <h3>🛠️ Teknologi yang Digunakan</h3>
-                        <div class="tech-badges">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">YOLOv9</span>
-                            <span class="tech-badge">Ultralytics</span>
-                            <span class="tech-badge">FastAPI</span>
-                            <span class="tech-badge">PyTorch</span>
-                            <span class="tech-badge">OpenCV</span>
-                            <span class="tech-badge">HTML5</span>
-                            <span class="tech-badge">CSS3</span>
-                            <span class="tech-badge">JavaScript</span>
-                        </div>
-                    </div>
-
-                    <div class="credits">
-                        <p>Dibuat oleh <strong>Hendra</strong> — Proyek A3-HXCODE</p>
-                    </div>
-                </div>
+            <!-- Confidence Slider -->
+            <div class="slider-group">
+              <label class="slider-label">
+                <span>Ambang Kepercayaan (Confidence Threshold)</span>
+                <span class="slider-value" id="confidence-value">25%</span>
+              </label>
+              <input type="range" class="slider" id="confidence-slider" min="5" max="95" value="25" step="5" />
+              <div class="slider-hints">
+                <span>🔍 Lebih Sensitif</span>
+                <span>✅ Lebih Akurat</span>
+              </div>
             </div>
-        </section>
 
+            <!-- Detect Button -->
+            <button class="btn-detect" id="btn-detect" disabled>
+              <span class="btn-icon">🔍</span>
+              <span class="btn-text">Mulai Deteksi</span>
+              <div class="btn-loader hidden" id="btn-loader">
+                <div class="spinner"></div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Result Area -->
+          <div class="card result-card">
+            <div class="card-header">
+              <h2>📋 Hasil Deteksi</h2>
+              <p class="card-desc" id="result-status">Menunggu gambar untuk diproses...</p>
+            </div>
+
+            <!-- Placeholder saat belum ada hasil -->
+            <div class="result-placeholder" id="result-placeholder">
+              <div class="placeholder-icon">🖼️</div>
+              <p>Hasil deteksi akan muncul di sini</p>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px">Upload gambar dan klik "Mulai Deteksi"</p>
+            </div>
+
+            <!-- Container gambar hasil -->
+            <div class="result-image-container hidden" id="result-image-container">
+              <img class="result-image" id="result-image" alt="Hasil deteksi api" />
+            </div>
+
+            <!-- Statistik Deteksi -->
+            <div class="detection-stats hidden" id="detection-stats">
+              <div class="stat-card stat-fire">
+                <div class="stat-number" id="stat-count">0</div>
+                <div class="stat-label">Api Terdeteksi</div>
+              </div>
+              <div class="stat-card stat-conf">
+                <div class="stat-number" id="stat-avg-conf">0%</div>
+                <div class="stat-label">Rata-rata Akurasi</div>
+              </div>
+            </div>
+
+            <!-- Tabel Detail -->
+            <div class="detection-table-wrapper hidden" id="detection-table-wrapper">
+              <h3>📊 Detail Deteksi</h3>
+              <table class="detection-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Label</th>
+                    <th>Akurasi</th>
+                    <th>Posisi (x1, y1, x2, y2)</th>
+                  </tr>
+                </thead>
+                <tbody id="detection-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: Dataset Stats -->
+      <section class="tab-panel" id="panel-stats">
+        <div class="stats-container">
+          <div class="card">
+            <div class="card-header">
+              <h2>📊 Statistik Dataset</h2>
+              <p class="card-desc">Ringkasan jumlah data yang digunakan untuk melatih model AI YOLOv9</p>
+            </div>
+            <div class="dataset-stats-grid" id="dataset-stats-grid">
+              <div class="ds-card ds-train">
+                <div class="ds-icon">🏋️</div>
+                <h3>Training</h3>
+                <p class="ds-desc">Data untuk melatih AI</p>
+                <div class="ds-numbers">
+                  <div class="ds-num"><span id="ds-train-img">—</span> Gambar</div>
+                  <div class="ds-num"><span id="ds-train-lbl">—</span> Label</div>
+                </div>
+              </div>
+              <div class="ds-card ds-valid">
+                <div class="ds-icon">✅</div>
+                <h3>Validasi</h3>
+                <p class="ds-desc">Data untuk validasi saat latihan</p>
+                <div class="ds-numbers">
+                  <div class="ds-num"><span id="ds-valid-img">—</span> Gambar</div>
+                  <div class="ds-num"><span id="ds-valid-lbl">—</span> Label</div>
+                </div>
+              </div>
+              <div class="ds-card ds-test">
+                <div class="ds-icon">🧪</div>
+                <h3>Testing</h3>
+                <p class="ds-desc">Data untuk ujian akhir AI</p>
+                <div class="ds-numbers">
+                  <div class="ds-num"><span id="ds-test-img">—</span> Gambar</div>
+                  <div class="ds-num"><span id="ds-test-lbl">—</span> Label</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>ℹ️ Informasi Dataset</h2>
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">Sumber</span>
+                <span class="info-value">Roboflow Universe</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Jumlah Kelas</span>
+                <span class="info-value">1 (Fire / Api)</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Resolusi Gambar</span>
+                <span class="info-value">640 × 640 px</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Lisensi</span>
+                <span class="info-value">CC BY 4.0</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Augmentasi</span>
+                <span class="info-value">Flip, Rotasi, Crop Acak</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Total Gambar</span>
+                <span class="info-value">5,710 gambar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: About -->
+      <section class="tab-panel" id="panel-about">
+        <div class="card about-card">
+          <div class="card-header">
+            <h2>🔥 Tentang Aplikasi Ini</h2>
+          </div>
+          <div class="about-content">
+            <p>
+              <strong>Fire Detection</strong> adalah aplikasi deteksi kebakaran real-time yang menggunakan model kecerdasan buatan <strong>YOLOv9</strong> (You Only Look Once v9). Aplikasi ini dirancang untuk mendeteksi keberadaan api dalam
+              gambar dengan akurasi tinggi.
+            </p>
+            <p>Teknologi ini sangat berguna untuk sistem pemantauan kebakaran otomatis, deteksi dini, dan analisis citra satelit untuk pencegahan bencana.</p>
+
+            <div class="about-flow">
+              <h3>🔄 Alur Kerja Aplikasi</h3>
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <div class="flow-number">1</div>
+                  <div class="flow-info">
+                    <h4>Upload Gambar</h4>
+                    <p>Pengguna mengunggah gambar melalui antarmuka web</p>
+                  </div>
+                </div>
+                <div class="flow-connector">→</div>
+                <div class="flow-step">
+                  <div class="flow-number">2</div>
+                  <div class="flow-info">
+                    <h4>Proses AI</h4>
+                    <p>Model YOLOv9 menganalisis gambar untuk mencari api</p>
+                  </div>
+                </div>
+                <div class="flow-connector">→</div>
+                <div class="flow-step">
+                  <div class="flow-number">3</div>
+                  <div class="flow-info">
+                    <h4>Hasil Deteksi</h4>
+                    <p>Kotak penanda ditampilkan di sekitar area api yang ditemukan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-stack">
+              <h3>🛠️ Teknologi yang Digunakan</h3>
+              <div class="tech-badges">
+                <span class="tech-badge">Python 3.10+</span>
+                <span class="tech-badge">YOLOv9</span>
+                <span class="tech-badge">Ultralytics</span>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">PyTorch</span>
+                <span class="tech-badge">OpenCV</span>
+                <span class="tech-badge">Pillow</span>
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Jinja2</span>
+                <span class="tech-badge">Uvicorn</span>
+              </div>
+            </div>
+
+            <div class="credits">
+              <p>Dibuat oleh <strong>Hendra</strong> — Proyek <strong>A3-HXCODE</strong> © 2026</p>
+              <p style="margin-top: 8px; font-size: 12px">
+                <a href="https://github.com/MR-HENDRA/Fire-Detection-YOLOv9" target="_blank" style="color: var(--fire-orange); text-decoration: none"> 📂 Lihat Source Code di GitHub </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>🔥 Fire Detection v1.0 &mdash; YOLOv9 AI &mdash; Hendra © 2026</p>
+      <p>🔥 Fire Detection v1.0 — YOLOv9 AI — Hendra / A3-HXCODE © 2026</p>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <script src="/static/app.js"></script>
-</body>
+  </body>
 </html>

@@ -1,8 +1,8 @@
 /**
- * Fire Detection App — Frontend Logic
- * =====================================
+ * Fire Detection App — Professional Frontend Logic
+ * =================================================
  * Mengatur interaksi drag-and-drop upload, panggilan API deteksi,
- * dan render hasil pada antarmuka web.
+ * animasi smooth, toast notifications, dan render hasil.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,7 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const detectionTableWrapper = document.getElementById('detection-table-wrapper');
     const detectionTableBody = document.getElementById('detection-table-body');
 
+    const toast = document.getElementById('toast');
+
     let selectedFile = null;
+
+    // ========================
+    // Toast Notification System
+    // ========================
+    function showToast(message, type = 'success', duration = 3000) {
+        toast.textContent = message;
+        toast.className = `toast ${type}`;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
 
     // ========================
     // Tab Navigation
@@ -91,13 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleFile(file) {
         // Validate file type
         if (!file.type.startsWith('image/')) {
-            alert('⚠️ Mohon pilih file gambar (JPG, PNG, WEBP).');
+            showToast('⚠️ Mohon pilih file gambar (JPG, PNG, WEBP).', 'error');
             return;
         }
 
         // Validate file size (max 10MB)
         if (file.size > 10 * 1024 * 1024) {
-            alert('⚠️ Ukuran file terlalu besar! Maksimum 10MB.');
+            showToast('⚠️ Ukuran file terlalu besar! Maksimum 10MB.', 'error');
             return;
         }
 
@@ -117,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset results
         resetResults();
+
+        // Show success toast
+        showToast(`✅ Gambar "${file.name}" siap diproses!`);
     }
 
     // ========================
@@ -149,13 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.success) {
                 displayResults(data.data);
+                showToast(`✅ Deteksi selesai! ${data.data.count} api ditemukan.`, 'success');
             } else {
                 resultStatus.textContent = `❌ Error: ${data.error}`;
                 resultStatus.style.color = '#ff4444';
+                showToast(`❌ Error: ${data.error}`, 'error');
             }
         } catch (error) {
             resultStatus.textContent = `❌ Koneksi gagal: ${error.message}`;
             resultStatus.style.color = '#ff4444';
+            showToast(`❌ Koneksi gagal: ${error.message}`, 'error');
         } finally {
             setLoading(false);
         }
@@ -194,14 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
             statAvgConf.textContent = `${avgConf.toFixed(1)}%`;
             resultStatus.textContent = `🔥 ${data.count} api terdeteksi!`;
             resultStatus.style.color = '#ff7800';
-        } else {
-            statAvgConf.textContent = '—';
-            resultStatus.textContent = '✅ Tidak ada api terdeteksi.';
-            resultStatus.style.color = '#22c55e';
-        }
 
-        // Build detection table
-        if (data.count > 0) {
+            // Build detection table
             detectionTableWrapper.classList.remove('hidden');
             detectionTableBody.innerHTML = '';
 
@@ -211,11 +226,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${idx + 1}</td>
                     <td style="color: var(--fire-orange); font-weight: 600;">🔥 ${det.label}</td>
                     <td style="color: var(--accent-green); font-weight: 700;">${det.confidence}%</td>
-                    <td style="font-family: monospace; font-size: 12px;">(${det.x1}, ${det.y1}, ${det.x2}, ${det.y2})</td>
+                    <td style="font-family: var(--font-mono); font-size: 12px;">(${det.x1}, ${det.y1}, ${det.x2}, ${det.y2})</td>
                 `;
                 detectionTableBody.appendChild(row);
             });
         } else {
+            statAvgConf.textContent = '—';
+            resultStatus.textContent = '✅ Tidak ada api terdeteksi.';
+            resultStatus.style.color = '#22c55e';
             detectionTableWrapper.classList.add('hidden');
         }
     }
@@ -253,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Gagal memuat statistik dataset:', error);
+            showToast('⚠️ Gagal memuat statistik dataset', 'error');
         }
     }
 
@@ -268,4 +287,67 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
         resetResults();
     });
+
+    // ========================
+    // Keyboard Shortcuts
+    // ========================
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + K to focus file input
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            fileInput.click();
+        }
+
+        // Escape to clear selection
+        if (e.key === 'Escape' && selectedFile) {
+            previewImage.classList.add('hidden');
+            dropzoneContent.classList.remove('hidden');
+            selectedFile = null;
+            btnDetect.disabled = true;
+            fileInput.value = '';
+            resetResults();
+        }
+    });
+
+    // ========================
+    // Smooth scroll for anchor links
+    // ========================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // ========================
+    // Add loading animation to cards
+    // ========================
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        observer.observe(card);
+    });
+
+    // ========================
+    // Console welcome message
+    // ========================
+    console.log('%c🔥 Fire Detection App — YOLOv9 AI %c✨', 'color: #ff8c00; font-size: 20px; font-weight: bold;', 'color: #ff4727; font-size: 20px;');
+    console.log('%cDibuat oleh Hendra — A3-HXCODE © 2026', 'color: #a0a0b0; font-size: 12px;');
 });

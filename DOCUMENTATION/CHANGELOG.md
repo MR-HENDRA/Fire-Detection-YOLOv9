@@ -19,12 +19,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 📋 Detailed detection table with coordinates and confidence
 - 🔥 5710 training images from Roboflow Universe
 - 📚 Comprehensive API documentation
-- 🧪 Automated API testing script
-- 🚀 One-click launcher script (run.bat)
-- 🏋️ Model training script with validation
+- 🧪 Automated API testing script (`LOCAL/test_api.py`)
+- 🚀 One-click launcher script (`LOCAL/run.bat`)
+- 🏋️ Model training script with validation (`LOCAL/train_model.py`)
 - ⚙️ Environment configuration template
 - 📖 Complete README with installation guide
 - 🔒 .gitignore for Python projects
+- 📓 Google Colab training notebook (`GOOGLE_COLAB/colab_fire_detection.ipynb`)
 
 ### Features
 - **Backend**:
@@ -33,7 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Multi-part form data support for file uploads
   - JSON API responses with proper error handling
   - CORS enabled for cross-origin requests
-  
+
 - **Frontend**:
   - Responsive design (mobile-friendly)
   - Tab-based navigation (Detection, Dataset, About)
@@ -42,14 +43,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Animated UI elements with smooth transitions
   - Loading states and progress indicators
   - Re-upload capability by clicking preview
-  
+
 - **AI Model**:
   - YOLOv9c (compact version) for balance of speed and accuracy
   - Automatic model download on first run
   - Adjustable confidence threshold
   - Bounding box visualization with fire-themed colors
   - Multiple fire detection support
-  
+
 - **Dataset**:
   - 5710 labeled images
   - Train/Valid/Test split (~70/20/10)
@@ -69,6 +70,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Documentation
 - README.md with complete setup guide
 - API_DOCUMENTATION.md with endpoint details and examples
+- DEPLOYMENT.md with production deployment guides
 - Inline code comments in Indonesian and English
 - Example integration code (Python, JavaScript, Node.js)
 - Troubleshooting section
@@ -115,7 +117,7 @@ This is the first stable release of the Fire Detection application using YOLOv9.
 
 **Installation:**
 ```bash
-pip install -r requirements.txt
+pip install -r LOCAL/requirements.txt
 python app/main.py
 ```
 
@@ -126,6 +128,35 @@ python app/main.py
 4. Upload an image
 5. Adjust confidence threshold
 6. Click "Mulai Deteksi"
+
+---
+
+## Project Structure
+
+```
+A3-HXCODE/
+├── app/
+│   ├── main.py              # FastAPI server
+│   ├── detector.py          # YOLOv9 detection module
+│   ├── static/
+│   │   ├── style.css        # Frontend styling
+│   │   └── app.js           # Frontend logic
+│   └── templates/
+│       └── index.html       # Main page
+├── GOOGLE_COLAB/
+│   └── colab_fire_detection.ipynb  # Training notebook
+├── LOCAL/
+│   ├── requirements.txt     # Python dependencies
+│   ├── run.bat              # Windows launcher
+│   ├── start_training.bat   # Training launcher
+│   ├── test_api.py          # API testing script
+│   └── train_model.py       # Model training script
+└── DOCUMENTATION/
+    ├── README.md            # Main documentation
+    ├── API_DOCUMENTATION.md # API endpoints
+    ├── CHANGELOG.md         # This file
+    └── DEPLOYMENT.md        # Deployment guides
+```
 
 ---
 
@@ -148,6 +179,7 @@ If you'd like to contribute to this project:
 
 ---
 
-**Author**: Hendra  
-**Project**: A3-HXCODE  
+**Author**: Hendra
+**Project**: A3-HXCODE
 **Date**: July 2026
+**Last Updated**: 2026-07-04

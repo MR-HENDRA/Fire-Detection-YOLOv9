@@ -38,7 +38,7 @@ cd d:\A3-HXCODE
 2. **Install dependencies**
 
 ```bash
-pip install -r requirements.txt
+pip install -r LOCAL/requirements.txt
 ```
 
 Dependencies yang akan diinstall:
@@ -91,15 +91,21 @@ A3-HXCODE/
 │   │   └── app.js           # Logic frontend
 │   └── templates/
 │       └── index.html       # Halaman utama
-├── FIRE DETECTION USING YOLOV9/
-│   └── DATASET/
-│       ├── data.yaml        # Konfigurasi dataset YOLO
-│       ├── train/           # Data training (4000+ gambar)
-│       ├── valid/           # Data validasi (1000+ gambar)
-│       └── test/            # Data testing (700+ gambar)
-├── requirements.txt         # Python dependencies
-├── README.md                # Dokumentasi (file ini)
-└── .gitignore               # Git ignore file
+├── GOOGLE_COLAB/
+│   └── colab_fire_detection.ipynb  # Notebook training di Google Colab
+├── LOCAL/
+│   ├── requirements.txt     # Python dependencies
+│   ├── run.bat              # Script untuk menjalankan server (Windows)
+│   ├── start_training.bat   # Script untuk training model (Windows)
+│   ├── test_api.py          # Script testing API
+│   └── train_model.py       # Script training model
+├── DOCUMENTATION/
+│   ├── README.md            # Dokumentasi (file ini)
+│   ├── API_DOCUMENTATION.md # Dokumentasi API endpoints
+│   ├── CHANGELOG.md         # Catatan perubahan
+│   └── DEPLOYMENT.md        # Panduan deployment
+├── .gitignore               # Git ignore file
+└── README.md                # README utama repository
 ```
 
 ## 🔧 API Endpoints
@@ -242,11 +248,11 @@ GET /api/dataset-stats
 ### Error: "Module not found"
 **Solusi**: Install ulang dependencies:
 ```bash
-pip install -r requirements.txt --upgrade
+pip install -r LOCAL/requirements.txt --upgrade
 ```
 
 ### Error: "Port already in use"
-**Solusi**: Ubah port di `main.py` atau hentikan aplikasi yang menggunakan port 8000:
+**Solusi**:
 ```bash
 # Cari process yang menggunakan port 8000
 netstat -ano | findstr :8000
@@ -256,7 +262,7 @@ taskkill /PID <PID> /F
 ```
 
 ### Deteksi Lambat
-**Solusi**: 
+**Solusi**:
 - Gunakan GPU jika tersedia (CUDA)
 - Kurangi resolusi gambar input
 - Gunakan model yang lebih kecil (yolov9n.pt)
@@ -288,9 +294,13 @@ taskkill /PID <PID> /F
 # Install ultralytics
 pip install ultralytics
 
-# Train model
-yolo detect train data="FIRE DETECTION USING YOLOV9/DATASET/data.yaml" model=yolov9c.pt epochs=100 imgsz=640
+# Train model (gunakan script yang sudah disediakan)
+python LOCAL/train_model.py train
 ```
+
+Atau gunakan Google Colab:
+- Buka `GOOGLE_COLAB/colab_fire_detection.ipynb`
+- Ikuti instruksi di notebook
 
 ## 📝 Lisensi
 
@@ -298,10 +308,10 @@ yolo detect train data="FIRE DETECTION USING YOLOV9/DATASET/data.yaml" model=yol
 - **Dataset**: CC BY 4.0
 - **Model**: Ultralytics YOLOv9 (GPL-3.0)
 
-## 👨‍💻 Author
+## 👨💻 Author
 
-**Hendra**  
-Proyek: A3-HXCODE  
+**Hendra**
+Proyek: A3-HXCODE
 Tahun: 2026
 
 ## 🙏 Credits
@@ -316,5 +326,4 @@ Tahun: 2026
 Jika ada pertanyaan atau masalah, silakan buat issue atau hubungi developer.
 
 ---
-
 **🔥 Stay Safe! Detect Fire Early with AI 🔥**

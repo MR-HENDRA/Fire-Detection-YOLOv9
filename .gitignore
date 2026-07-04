@@ -69,6 +69,7 @@ venv.bak/
 # DATASET (Very large - 13,000+ images)
 # =============================================
 LOCAL/DATASET/
+LOCAL/DATASET.zip
 GOOGLE_COLAB/DATASET/
 **/DATASET/
 **/train/
@@ -88,6 +89,11 @@ wandb/
 *.log
 results.txt
 results*.txt
+
+# Training results and weights
+RESULT_TRAINING/
+!RESULT_TRAINING/README.md
+!RESULT_TRAINING/.gitkeep
 
 # =============================================
 # TEMPORARY & CACHE FILES

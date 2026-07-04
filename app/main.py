@@ -13,7 +13,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from detector import detect_fire, get_dataset_stats
+from detector import detect_fire, get_dataset_stats, get_model_info
 
 # Konfigurasi path
 BASE_DIR = Path(__file__).resolve().parent
@@ -99,6 +99,29 @@ async def api_dataset_stats():
         return JSONResponse(content={
             "success": True,
             "data": stats
+        })
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": str(e)
+            }
+        )
+
+@app.get("/api/model-info")
+async def api_model_info():
+    """
+    API endpoint untuk mengambil informasi model yang digunakan.
+
+    Returns:
+        JSON berisi informasi model: mAP50, mAP50-95, Precision, Recall, F1-Score, dll.
+    """
+    try:
+        model_info = get_model_info()
+        return JSONResponse(content={
+            "success": True,
+            "data": model_info
         })
     except Exception as e:
         return JSONResponse(

@@ -179,37 +179,108 @@
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
-              <h2>ℹ️ Informasi Dataset</h2>
-            </div>
-            <div class="info-grid">
-              <div class="info-item">
-                <span class="info-label">Sumber</span>
-                <span class="info-value">Roboflow Universe</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Jumlah Kelas</span>
-                <span class="info-value">1 (Fire / Api)</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Resolusi Gambar</span>
-                <span class="info-value">640 × 640 px</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Lisensi</span>
-                <span class="info-value">CC BY 4.0</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Augmentasi</span>
-                <span class="info-value">Flip, Rotasi, Crop Acak</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Total Gambar</span>
-                <span class="info-value">5,710 gambar</span>
-              </div>
-            </div>
-          </div>
+           <div class="card">
+             <div class="card-header">
+               <h2>Informasi Dataset</h2>
+             </div>
+             <div class="info-grid">
+               <div class="info-item">
+                 <span class="info-label">Sumber</span>
+                 <span class="info-value">Roboflow Universe</span>
+               </div>
+               <div class="info-item">
+                 <span class="info-label">Jumlah Kelas</span>
+                 <span class="info-value">1 (Fire / Api)</span>
+               </div>
+               <div class="info-item">
+                 <span class="info-label">Resolusi Gambar</span>
+                 <span class="info-value">640 × 640 px</span>
+               </div>
+               <div class="info-item">
+                 <span class="info-label">Lisensi</span>
+                 <span class="info-value">CC BY 4.0</span>
+               </div>
+               <div class="info-item">
+                 <span class="info-label">Augmentasi</span>
+                 <span class="info-value">Flip, Rotasi, Crop Acak</span>
+               </div>
+               <div class="info-item">
+                 <span class="info-label">Total Gambar</span>
+                 <span class="info-value">5,710 gambar</span>
+               </div>
+             </div>
+           </div>
+
+           <!-- Model Information Card -->
+           <div class="card">
+             <div class="card-header">
+               <h2>Informasi Model AI</h2>
+               <p class="card-desc">Metrik performa model YOLOv9 yang digunakan untuk deteksi kebakaran</p>
+             </div>
+             <div class="model-info-grid" id="model-info-grid">
+               <div class="mi-card mi-map50">
+                 <div class="mi-icon">🎯</div>
+                 <h3>mAP@50</h3>
+                 <p class="mi-desc">Mean Average Precision</p>
+                 <div class="mi-value" id="mi-map50">-</div>
+                 <div class="mi-percent">%</div>
+               </div>
+               <div class="mi-card mi-map50-95">
+                 <div class="mi-icon">📊</div>
+                 <h3>mAP@50-95</h3>
+                 <p class="mi-desc">Mean Average Precision</p>
+                 <div class="mi-value" id="mi-map50-95">-</div>
+                 <div class="mi-percent">%</div>
+               </div>
+               <div class="mi-card mi-precision">
+                 <div class="mi-icon">✅</div>
+                 <h3>Precision</h3>
+                 <p class="mi-desc">Akurasi Deteksi Positif</p>
+                 <div class="mi-value" id="mi-precision">-</div>
+                 <div class="mi-percent">%</div>
+               </div>
+               <div class="mi-card mi-recall">
+                 <div class="mi-icon">🔍</div>
+                 <h3>Recall</h3>
+                 <p class="mi-desc">Kemampuan Temukan Api</p>
+                 <div class="mi-value" id="mi-recall">-</div>
+                 <div class="mi-percent">%</div>
+               </div>
+               <div class="mi-card mi-f1">
+                 <div class="mi-icon">⚖️</div>
+                 <h3>F1-Score</h3>
+                 <p class="mi-desc">Keseimbangan Precision & Recall</p>
+                 <div class="mi-value" id="mi-f1">-</div>
+                 <div class="mi-percent">%</div>
+               </div>
+             </div>
+             <div class="model-details">
+               <div class="model-detail-item">
+                 <span class="model-detail-label">Nama Model</span>
+                 <span class="model-detail-value" id="mi-model-name">-</span>
+               </div>
+               <div class="model-detail-item">
+                 <span class="model-detail-label">Tipe Model</span>
+                 <span class="model-detail-value" id="mi-model-type">-</span>
+               </div>
+               <div class="model-detail-item">
+                 <span class="model-detail-label">Epochs Training</span>
+                 <span class="model-detail-value" id="mi-epochs">-</span>
+               </div>
+               <div class="model-detail-item">
+                 <span class="model-detail-label">Ukuran Gambar</span>
+                 <span class="model-detail-value" id="mi-image-size">-</span>
+               </div>
+               <div class="model-detail-item">
+                 <span class="model-detail-label">Batch Size</span>
+                 <span class="model-detail-value" id="mi-batch-size">-</span>
+               </div>
+               <div class="model-detail-item">
+                 <span class="model-detail-label">Waktu Evaluasi</span>
+                 <span class="model-detail-value" id="mi-eval-time">-</span>
+               </div>
+             </div>
+           </div>
         </div>
       </section>
 

@@ -49,6 +49,7 @@
 ## ✨ Features
 
 ### Core Features
+
 - 🎯 **Real-time Fire Detection**: Upload images and get instant fire detection results
 - 🎚️ **Confidence Threshold**: Adjust detection sensitivity from 5% to 95%
 - 📊 **Dataset Statistics**: View complete dataset information (train/valid/test splits)
@@ -57,6 +58,7 @@
 - 🎨 **Modern UI**: Dark theme with glass morphism design
 
 ### Technical Features
+
 - **Singleton Model Loading**: Memory-efficient model management
 - **Automatic Model Download**: YOLOv9 model downloads on first run
 - **CORS Enabled**: Ready for cross-origin requests
@@ -69,12 +71,12 @@
 
 ### Prerequisites
 
-| Requirement | Version | Notes |
-|-------------|---------|-------|
-| Python | 3.8+ | Required |
-| pip | Latest | Python package manager |
-| RAM | 2GB minimum | 4GB recommended |
-| GPU | Optional | CUDA enabled for faster inference |
+| Requirement | Version     | Notes                             |
+| ----------- | ----------- | --------------------------------- |
+| Python      | 3.8+        | Required                          |
+| pip         | Latest      | Python package manager            |
+| RAM         | 2GB minimum | 4GB recommended                   |
+| GPU         | Optional    | CUDA enabled for faster inference |
 
 ### Installation
 
@@ -92,6 +94,7 @@ pip install -r LOCAL/requirements.txt
 ```
 
 **Dependencies included:**
+
 - `ultralytics>=8.0.0` - YOLOv9 framework
 - `torch>=2.0.0` - PyTorch deep learning
 - `torchvision>=0.15.0` - PyTorch computer vision
@@ -134,6 +137,7 @@ http://localhost:8000
 ```
 
 **Available endpoints:**
+
 - **Web Interface**: `http://localhost:8000`
 - **API Documentation**: `http://localhost:8000/docs` (Swagger UI)
 - **Alternative Docs**: `http://localhost:8000/redoc` (ReDoc)
@@ -177,15 +181,16 @@ Z01-FIRE DETECTION/
 
 ### Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Main web interface |
-| POST | `/api/detect` | Detect fire in uploaded image |
-| GET | `/api/dataset-stats` | Get dataset statistics |
+| Method | Endpoint             | Description                   |
+| ------ | -------------------- | ----------------------------- |
+| GET    | `/`                  | Main web interface            |
+| POST   | `/api/detect`        | Detect fire in uploaded image |
+| GET    | `/api/dataset-stats` | Get dataset statistics        |
 
 ### Detect Fire Endpoint
 
 **Request:**
+
 ```bash
 POST /api/detect
 Content-Type: multipart/form-data
@@ -201,6 +206,7 @@ Content-Type: multipart/form-data
 **Max File Size:** 10MB
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -224,23 +230,23 @@ Content-Type: multipart/form-data
 ### Dataset Statistics Endpoint
 
 **Request:**
+
 ```bash
 GET /api/dataset-stats
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
   "data": {
-    "train": {"images": 4808, "labels": 4808},
-    "valid": {"images": 601, "labels": 601},
-    "test": {"images": 301, "labels": 301}
+    "train": { "images": 4808, "labels": 4808 },
+    "valid": { "images": 601, "labels": 601 },
+    "test": { "images": 301, "labels": 301 }
   }
 }
 ```
-
-For complete API documentation, see [DOCUMENTATION/API_DOCUMENTATION.md](DOCUMENTATION/API_DOCUMENTATION.md)
 
 ---
 
@@ -248,28 +254,29 @@ For complete API documentation, see [DOCUMENTATION/API_DOCUMENTATION.md](DOCUMEN
 
 ### Dataset Information
 
-| Property | Value |
-|----------|-------|
-| **Source** | [Roboflow Universe - Fire Detection](https://universe.roboflow.com/ltttnt/fire-vqbia) |
-| **License** | CC BY 4.0 |
-| **Total Images** | 5,710 |
-| **Classes** | 1 (Fire) |
-| **Resolution** | 640 × 640 pixels |
-| **Format** | YOLO format |
+| Property         | Value                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| **Source**       | [Roboflow Universe - Fire Detection](https://universe.roboflow.com/ltttnt/fire-vqbia) |
+| **License**      | CC BY 4.0                                                                             |
+| **Total Images** | 5,710                                                                                 |
+| **Classes**      | 1 (Fire)                                                                              |
+| **Resolution**   | 640 × 640 pixels                                                                      |
+| **Format**       | YOLO format                                                                           |
 
 ### Dataset Split
 
-| Split | Images | Labels | Percentage |
-|-------|--------|--------|------------|
-| Train | 4,808 | 4,808 | ~84% |
-| Validation | 601 | 601 | ~11% |
-| Test | 301 | 301 | ~5% |
+| Split      | Images | Labels | Percentage |
+| ---------- | ------ | ------ | ---------- |
+| Train      | 4,808  | 4,808  | ~84%       |
+| Validation | 601    | 601    | ~11%       |
+| Test       | 301    | 301    | ~5%        |
 
 ---
 
 ## 🛠️ Built With
 
 ### Backend
+
 - **[Python 3.8+](https://www.python.org/)** - Programming language
 - **[FastAPI](https://fastapi.tiangolo.com/)** - Modern web framework
 - **[Ultralytics YOLOv9](https://github.com/ultralytics/ultralytics)** - Object detection framework
@@ -277,12 +284,14 @@ For complete API documentation, see [DOCUMENTATION/API_DOCUMENTATION.md](DOCUMEN
 - **[Pillow (PIL)](https://python-pillow.org/)** - Image processing
 
 ### Frontend
+
 - **[HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)** - Page structure
 - **[CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)** - Styling with glass morphism
 - **[JavaScript (ES6+)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)** - Frontend logic
 - **[Google Fonts - Inter](https://fonts.google.com/specimen/Inter)** - Typography
 
 ### Model Architecture
+
 - **Model**: YOLOv9c (Compact version)
 - **Input Size**: 640 × 640 pixels
 - **Classes**: 1 (Fire)
@@ -293,13 +302,13 @@ For complete API documentation, see [DOCUMENTATION/API_DOCUMENTATION.md](DOCUMEN
 
 ## 📈 Performance
 
-| Metric | Value | Notes |
-|--------|-------|-------|
-| **Inference Time** | 0.5 - 2 seconds | Depends on hardware |
-| **Accuracy** | 85-95% | Depends on confidence threshold |
-| **Model Size** | ~50MB | yolov9c.pt |
-| **Memory Usage** | ~2GB RAM | During inference |
-| **GPU Acceleration** | Supported | CUDA enabled |
+| Metric               | Value           | Notes                           |
+| -------------------- | --------------- | ------------------------------- |
+| **Inference Time**   | 0.5 - 2 seconds | Depends on hardware             |
+| **Accuracy**         | 85-95%          | Depends on confidence threshold |
+| **Model Size**       | ~50MB           | yolov9c.pt                      |
+| **Memory Usage**     | ~2GB RAM        | During inference                |
+| **GPU Acceleration** | Supported       | CUDA enabled                    |
 
 ---
 
@@ -332,21 +341,21 @@ For complete API documentation, see [DOCUMENTATION/API_DOCUMENTATION.md](DOCUMEN
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| **Model not found** | Model downloads automatically on first run. Ensure internet connection |
-| **Module not found** | Reinstall dependencies: `pip install -r LOCAL/requirements.txt --upgrade` |
+| Issue                   | Solution                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------ |
+| **Model not found**     | Model downloads automatically on first run. Ensure internet connection               |
+| **Module not found**    | Reinstall dependencies: `pip install -r LOCAL/requirements.txt --upgrade`            |
 | **Port already in use** | Find and kill process: `netstat -ano \| findstr :8000` then `taskkill /PID <PID> /F` |
-| **Slow detection** | Use GPU (CUDA), reduce image resolution, or use smaller model (yolov9n.pt) |
-| **False positives** | Increase confidence threshold (move slider right) |
-| **Fire not detected** | Decrease confidence threshold (move slider left) |
+| **Slow detection**      | Use GPU (CUDA), reduce image resolution, or use smaller model (yolov9n.pt)           |
+| **False positives**     | Increase confidence threshold (move slider right)                                    |
+| **Fire not detected**   | Decrease confidence threshold (move slider left)                                     |
 
 ### Error Codes
 
-| Code | Description |
-|------|-------------|
-| 400 | Bad Request - Invalid parameters |
-| 500 | Internal Server Error - Server-side issue |
+| Code | Description                               |
+| ---- | ----------------------------------------- |
+| 400  | Bad Request - Invalid parameters          |
+| 500  | Internal Server Error - Server-side issue |
 
 ---
 
@@ -384,17 +393,18 @@ python LOCAL/train_model.py train
 
 This project is open source and available under the following licenses:
 
-| Component | License | Link |
-|-----------|---------|------|
-| **Code** | MIT License | [LICENSE](https://opensource.org/licenses/MIT) |
-| **Dataset** | CC BY 4.0 | [Creative Commons](https://creativecommons.org/licenses/by/4.0/) |
-| **YOLOv9 Model** | GPL-3.0 | [Ultralytics License](https://github.com/ultralytics/ultralytics/blob/main/LICENSE) |
+| Component        | License     | Link                                                                                |
+| ---------------- | ----------- | ----------------------------------------------------------------------------------- |
+| **Code**         | MIT License | [LICENSE](https://opensource.org/licenses/MIT)                                      |
+| **Dataset**      | CC BY 4.0   | [Creative Commons](https://creativecommons.org/licenses/by/4.0/)                    |
+| **YOLOv9 Model** | GPL-3.0     | [Ultralytics License](https://github.com/ultralytics/ultralytics/blob/main/LICENSE) |
 
 ---
 
 ## 👤 Author
 
 **Hendra**
+
 - **Project**: Z01-FIRE DETECTION
 - **Year**: 2026
 - **GitHub**: [MR-HENDRA](https://github.com/MR-HENDRA)
@@ -413,4 +423,4 @@ This project is open source and available under the following licenses:
 
 **🔥 Stay Safe! Detect Fire Early with AI 🔥**
 
-*For questions or issues, please create an issue in the repository or contact the author.*
+_For questions or issues, please create an issue in the repository or contact the author._

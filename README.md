@@ -143,10 +143,13 @@ http://localhost:8000
 ## 📁 Project Structure
 
 ```
-A3-HXCODE/
+Z01-FIRE DETECTION/
 ├── app/                          # Main application
 │   ├── main.py                   # FastAPI server entry point
 │   ├── detector.py               # YOLOv9 detection module
+│   ├── requirements.txt          # Python dependencies
+│   ├── run.bat                   # Windows launcher script
+│   ├── test_api.py               # API testing script
 │   ├── static/
 │   │   ├── style.css             # Frontend styles
 │   │   └── app.js                # Frontend JavaScript
@@ -154,19 +157,18 @@ A3-HXCODE/
 │       └── index.html            # Main HTML template
 ├── GOOGLE_COLAB/                 # Google Colab resources
 │   └── colab_fire_detection.ipynb # Training notebook
+├── KAGGLE/                      # Kaggle resources
+│   └── kaggle-fire-detection.ipynb # Kaggle training notebook
 ├── LOCAL/                        # Local development files
-│   ├── requirements.txt          # Python dependencies
-│   ├── run.bat                   # Windows launcher script
 │   ├── start_training.bat        # Training launcher script
-│   ├── test_api.py               # API testing script
 │   └── train_model.py            # Model training script
 ├── DOCUMENTATION/                # Project documentation
-│   ├── README.md                 # This file
+│   ├── README.md                 # Detailed documentation
 │   ├── API_DOCUMENTATION.md      # API endpoints documentation
 │   ├── CHANGELOG.md              # Version history
 │   └── DEPLOYMENT.md             # Deployment guides
 ├── .gitignore                    # Git ignore rules
-└── README.md                     # Repository root README
+└── README.md                     # This file
 ```
 
 ---
@@ -231,14 +233,14 @@ GET /api/dataset-stats
 {
   "success": true,
   "data": {
-    "train": {"images": 4000, "labels": 4000},
-    "valid": {"images": 1000, "labels": 1000},
-    "test": {"images": 710, "labels": 710}
+    "train": {"images": 4808, "labels": 4808},
+    "valid": {"images": 601, "labels": 601},
+    "test": {"images": 301, "labels": 301}
   }
 }
 ```
 
-For complete API documentation, see [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+For complete API documentation, see [DOCUMENTATION/API_DOCUMENTATION.md](DOCUMENTATION/API_DOCUMENTATION.md)
 
 ---
 
@@ -393,7 +395,7 @@ This project is open source and available under the following licenses:
 ## 👤 Author
 
 **Hendra**
-- **Project**: A3-HXCODE
+- **Project**: Z01-FIRE DETECTION
 - **Year**: 2026
 - **GitHub**: [MR-HENDRA](https://github.com/MR-HENDRA)
 

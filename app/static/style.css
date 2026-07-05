@@ -1400,46 +1400,46 @@ body {
 
 /* --- Responsive --- */
 @media (max-width: 1100px) {
-    .detect-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
+  .detect-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 
-    .dataset-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .dataset-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .info-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .model-info-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .model-info-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    .model-details {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .model-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .header-content {
-        flex-direction: column;
-        height: auto;
-        padding: 16px 0;
-        gap: 16px;
-    }
+  .header-content {
+    flex-direction: column;
+    height: auto;
+    padding: 16px 0;
+    gap: 16px;
+  }
 
-    .nav-tabs {
-        width: 100%;
-        max-width: 400px;
-    }
+  .nav-tabs {
+    width: 100%;
+    max-width: 400px;
+  }
 
-    .flow-steps {
-        flex-direction: column;
-    }
+  .flow-steps {
+    flex-direction: column;
+  }
 
-    .flow-connector {
-        transform: rotate(90deg);
-    }
+  .flow-connector {
+    transform: rotate(90deg);
+  }
 }
 
 @media (max-width: 768px) {

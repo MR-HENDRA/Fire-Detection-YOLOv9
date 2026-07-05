@@ -11,7 +11,7 @@ import time
 
 # Konfigurasi
 BASE_URL = "http://localhost:8000"
-TEST_IMAGE_DIR = Path("test_images")  # Folder dengan gambar test
+TEST_IMAGE_DIR = Path("app/test_images")  # Folder dengan gambar test
 
 class Colors:
     """ANSI color codes untuk output terminal."""

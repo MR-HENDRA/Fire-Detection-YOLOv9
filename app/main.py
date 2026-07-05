@@ -23,7 +23,7 @@ DATASET_DIR = BASE_DIR.parent / "LOCAL" / "DATASET"
 app = FastAPI(
     title="🔥 Fire Detection - YOLOv9",
     description="Aplikasi deteksi kebakaran menggunakan YOLOv9",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 # Mount folder static (CSS, JS)
@@ -36,17 +36,11 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     """Halaman utama aplikasi."""
-    return templates.TemplateResponse(
-        request=request,
-        name="index.html"
-    )
+    return templates.TemplateResponse(request=request, name="index.html")
 
 
 @app.post("/api/detect")
-async def api_detect(
-    file: UploadFile = File(...),
-    confidence: float = Form(0.25)
-):
+async def api_detect(file: UploadFile = File(...), confidence: float = Form(0.25)):
     """
     API endpoint untuk mendeteksi api pada gambar yang diunggah.
 
@@ -64,18 +58,11 @@ async def api_detect(
         # Jalankan deteksi
         result = detect_fire(image_bytes, confidence=confidence)
 
-        return JSONResponse(content={
-            "success": True,
-            "data": result
-        })
+        return JSONResponse(content={"success": True, "data": result})
 
     except Exception as e:
         return JSONResponse(
-            status_code=500,
-            content={
-                "success": False,
-                "error": str(e)
-            }
+            status_code=500, content={"success": False, "error": str(e)}
         )
 
 
@@ -94,20 +81,14 @@ async def api_dataset_stats():
             stats = {
                 "train": {"images": 4808, "labels": 4808},
                 "valid": {"images": 601, "labels": 601},
-                "test": {"images": 301, "labels": 301}
+                "test": {"images": 301, "labels": 301},
             }
-        return JSONResponse(content={
-            "success": True,
-            "data": stats
-        })
+        return JSONResponse(content={"success": True, "data": stats})
     except Exception as e:
         return JSONResponse(
-            status_code=500,
-            content={
-                "success": False,
-                "error": str(e)
-            }
+            status_code=500, content={"success": False, "error": str(e)}
         )
+
 
 @app.get("/api/model-info")
 async def api_model_info():
@@ -119,25 +100,19 @@ async def api_model_info():
     """
     try:
         model_info = get_model_info()
-        return JSONResponse(content={
-            "success": True,
-            "data": model_info
-        })
+        return JSONResponse(content={"success": True, "data": model_info})
     except Exception as e:
         return JSONResponse(
-            status_code=500,
-            content={
-                "success": False,
-                "error": str(e)
-            }
+            status_code=500, content={"success": False, "error": str(e)}
         )
 
 
 if __name__ == "__main__":
     import uvicorn
+
     print("=" * 60)
     print("🔥 Fire Detection App - YOLOv9")
     print("=" * 60)
-    print("Buka browser dan akses: http://localhost:8000")
+    print("Buka browser dan akses: http://localhost:8001")
     print("=" * 60)
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)

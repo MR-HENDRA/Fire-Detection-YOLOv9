@@ -25,7 +25,7 @@ python -c "import fastapi, uvicorn, ultralytics" >nul 2>&1
 if %errorlevel% neq 0 (
     echo [WARNING] Dependencies belum terinstall lengkap.
     echo [INFO] Menginstall dependencies...
-    pip install -r requirements.txt
+    pip install -r app/requirements.txt
     if %errorlevel% neq 0 (
         echo [ERROR] Gagal menginstall dependencies!
         pause

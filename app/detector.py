@@ -12,7 +12,7 @@ from ultralytics import YOLO
 
 # Path ke model YOLOv9 pre-trained (akan diunduh otomatis saat pertama kali dijalankan)
 # Menggunakan model custom hasil training
-MODEL_PATH = Path(__file__).resolve().parent.parent / "LOCAL" / "fire_detection_custom.pt"
+MODEL_PATH = Path(__file__).resolve().parent.parent / "RESULT_TRAINING" / "run_001" / "weights" / "best.pt"
 
 # Singleton model agar hanya dimuat sekali
 _model = None

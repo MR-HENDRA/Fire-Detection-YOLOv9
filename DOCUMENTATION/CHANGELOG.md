@@ -179,10 +179,13 @@ python app/main.py
 ## 📖 Project Structure
 
 ```
-A3-HXCODE/
+Z01-FIRE DETECTION/
 ├── app/                          # Main application directory
 │   ├── main.py                   # FastAPI server entry point
 │   ├── detector.py               # YOLOv9 detection logic
+│   ├── requirements.txt          # Python dependencies
+│   ├── run.bat                   # Windows batch file to run server
+│   ├── test_api.py               # API testing and validation script
 │   ├── static/
 │   │   ├── style.css             # Frontend CSS styles
 │   │   └── app.js                # Frontend JavaScript
@@ -190,14 +193,12 @@ A3-HXCODE/
 │       └── index.html            # Main HTML template
 ├── GOOGLE_COLAB/                 # Google Colab resources
 │   └── colab_fire_detection.ipynb # Jupyter notebook for training
+├── KAGGLE/                      # Kaggle resources
+│   └── kaggle-fire-detection.ipynb # Kaggle training notebook
 ├── LOCAL/                        # Local development files
-│   ├── requirements.txt          # Python package dependencies
-│   ├── run.bat                   # Windows batch file to run server
 │   ├── start_training.bat        # Windows batch file for training
-│   ├── test_api.py               # API testing and validation script
 │   └── train_model.py            # Model training script
 ├── DOCUMENTATION/                # Project documentation
-│   ├── README.md                 # Main documentation file
 │   ├── API_DOCUMENTATION.md      # API endpoints documentation
 │   ├── CHANGELOG.md              # This file - version history
 │   └── DEPLOYMENT.md             # Deployment guides
@@ -245,7 +246,7 @@ This project uses multiple licenses:
 **Hendra**
 
 - **GitHub**: [@MR-HENDRA](https://github.com/MR-HENDRA)
-- **Project**: A3-HXCODE
+- **Project**: Z01-FIRE DETECTION
 - **Year**: 2026
 - **Email**: (available in GitHub profile)
 

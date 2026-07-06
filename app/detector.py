@@ -12,7 +12,13 @@ from ultralytics import YOLO
 
 # Path ke model YOLOv9 pre-trained (akan diunduh otomatis saat pertama kali dijalankan)
 # Menggunakan model custom hasil training
-MODEL_PATH = Path(__file__).resolve().parent.parent / "RESULT_TRAINING" / "run_001" / "weights" / "best.pt"
+MODEL_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "RESULT_TRAINING"
+    / "run_001"
+    / "weights"
+    / "best.pt"
+)
 
 # Singleton model agar hanya dimuat sekali
 _model = None
@@ -161,6 +167,7 @@ def get_dataset_stats(dataset_path: str) -> dict:
 
     return stats
 
+
 def get_model_info() -> dict:
     """
     Mengambil informasi model yang digunakan (metrik training).
@@ -168,7 +175,12 @@ def get_model_info() -> dict:
     Returns:
         dict berisi informasi model: mAP50, mAP50-95, Precision, Recall, F1-Score, dll.
     """
-    model_info_path = Path(__file__).resolve().parent.parent / "RESULT_TRAINING" / "run_001" / "evaluation_metrics.txt"
+    model_info_path = (
+        Path(__file__).resolve().parent.parent
+        / "RESULT_TRAINING"
+        / "run_001"
+        / "evaluation_metrics.txt"
+    )
 
     # Default values jika file tidak ditemukan
     default_info = {
@@ -179,39 +191,39 @@ def get_model_info() -> dict:
         "precision": 0.0,
         "recall": 0.0,
         "f1_score": 0.0,
-        "training_epochs": 50,
+        "training_epochs": 100,
         "image_size": 640,
         "batch_size": 16,
         "model_type": "YOLOv9c",
-        "class_names": ["fire"]
+        "class_names": ["fire"],
     }
 
     if not model_info_path.exists():
         return default_info
 
     try:
-        with open(model_info_path, 'r') as f:
+        with open(model_info_path, "r") as f:
             lines = f.readlines()
 
         info = default_info.copy()
         for line in lines:
             line = line.strip()
-            if ':' in line:
-                key, value = line.split(':', 1)
-                key = key.strip().lower()
+            if ":" in line:
+                key, value = line.split(":", 1)
+                key = key.strip().lower().replace("@", "").replace("-", "_")
                 value = value.strip()
 
-                if key == "map50":
+                if key in ["map50", "map_50"]:
                     info["mAP50"] = float(value)
-                elif key == "map50-95":
+                elif key in ["map50_95", "map_50_95"]:
                     info["mAP50_95"] = float(value)
                 elif key == "precision":
                     info["precision"] = float(value)
                 elif key == "recall":
                     info["recall"] = float(value)
-                elif key == "f1-score":
+                elif key in ["f1_score", "f1score"]:
                     info["f1_score"] = float(value)
-                elif key == "evaluation time":
+                elif key in ["evaluation time", "evaluation date"]:
                     info["evaluation_time"] = value
 
         return info
